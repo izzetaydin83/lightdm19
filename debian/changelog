@@ -1,3 +1,10 @@
+lightdm-gtk-greeter (2.0.6-1pardus19) unstable; urgency=medium
+
+  * Infobar Messages
+  * get rid of gpb junk
+
+ -- İzzet Aydın <izzet.aydin@pardus.org.tr>  Sun, 22 Mar 2020 20:05:15 +0300
+
 lightdm-gtk-greeter (2.0.6-1) unstable; urgency=medium
 
   * New upstream version 2.0.6
