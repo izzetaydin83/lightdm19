@@ -1,3 +1,9 @@
+lightdm-gtk-greeter (2.0.6-1pardus19.1) unstable; urgency=medium
+
+  * Samba/AD Messages
+
+ -- İzzet Aydın <izzet.aydin@pardus.org.tr>   Mon, 06 Apr 2020 12:48:35 +0300
+
 lightdm-gtk-greeter (2.0.6-1pardus19) unstable; urgency=medium
 
   * Infobar Messages
