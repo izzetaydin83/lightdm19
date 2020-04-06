@@ -1,0 +1,110 @@
+From: =?utf-8?b?xLB6emV0IEF5ZMSxbg==?= <izzet.aydin@pardus.org.tr>
+Date: Mon, 6 Apr 2020 12:47:24 +0300
+Subject: Samba/AD Infobar Messages
+
+---
+ po/lightdm-gtk-greeter.pot | 32 ++++++++++++++++++++++++++++++++
+ po/tr.po                   | 32 ++++++++++++++++++++++++++++++++
+ src/lightdm-gtk-greeter.c  |  2 ++
+ 3 files changed, 66 insertions(+)
+
+diff --git a/po/lightdm-gtk-greeter.pot b/po/lightdm-gtk-greeter.pot
+index 714c629..4006363 100644
+--- a/po/lightdm-gtk-greeter.pot
++++ b/po/lightdm-gtk-greeter.pot
+@@ -366,3 +366,35 @@ msgstr ""
+ msgid "New password: "
+ msgstr ""
+ 
++msgid "Current password"
++msgstr ""
++
++msgid "Password expired. Change your password now."
++msgstr ""
++
++msgid "BAD PASSWORD: The password is shorter than 8 characters"
++msgstr ""
++
++msgid "BAD PASSWORD: No password supplied"
++msgstr ""
++
++msgid "BAD PASSWORD: The password is the same as the old one"
++msgstr ""
++
++msgid "BAD PASSWORD: The password is a palindrome"
++msgstr ""
++
++msgid "BAD PASSWORD: The password fails the dictionary check - it is too simplistic/systematic"
++msgstr ""
++
++msgid "Password change failed. Server message: Old password not accepted."
++msgstr ""
++
++msgid "BAD PASSWORD: The password fails the dictionary check - it does not contain enough DIFFERENT characters"
++msgstr ""
++
++msgid "BAD PASSWORD: The password fails the dictionary check - it is based on a dictionary word"
++msgstr ""
++
++msgid "Password change failed. Server message: Password does not meet complexity requirements"
++msgstr ""
+diff --git a/po/tr.po b/po/tr.po
+index cb5b26c..1b9c0d4 100644
+--- a/po/tr.po
++++ b/po/tr.po
+@@ -358,3 +358,35 @@ msgstr "Yeni parolayı tekrar girin: "
+ msgid "New password: "
+ msgstr "Yeni parolayı girin:"
+ 
++msgid "Current password"
++msgstr "Geçerli şifrenizi giriniz"
++
++msgid "Password expired. Change your password now."
++msgstr "Şifrenizi değiştirmeniz gerekmektedir. Mevcut şifrenizi giriniz:"
++
++msgid "BAD PASSWORD: The password is shorter than 8 characters"
++msgstr "KÖTÜ ŞİFRE: Şifre 8 karakterden kısa olamaz."
++
++msgid "BAD PASSWORD: No password supplied"
++msgstr "Şifre girilmedi."
++
++msgid "BAD PASSWORD: The password is the same as the old one"
++msgstr "Yeni şifre eskisi ile aynı olamaz."
++
++msgid "BAD PASSWORD: The password is a palindrome"
++msgstr "KÖTÜ ŞİFRE: Şifre bir palindrom."
++
++msgid "BAD PASSWORD: The password fails the dictionary check - it is too simplistic/systematic"
++msgstr "KÖTÜ ŞİFRE: Şifre sözlük kontrolünü geçemedi."
++
++msgid "Password change failed. Server message: Old password not accepted."
++msgstr "Yeni şifre eskisi ile aynı olamaz."
++
++msgid "BAD PASSWORD: The password fails the dictionary check - it does not contain enough DIFFERENT characters"
++msgstr "KÖTÜ ŞİFRE: Şifre sözlük kontrolünü geçemedi."
++
++msgid "BAD PASSWORD: The password fails the dictionary check - it is based on a dictionary word"
++msgstr "KÖTÜ ŞİFRE: Şifre sözlük kontrolünü geçemedi." 
++
++msgid "Password change failed. Server message: Password does not meet complexity requirements"
++msgstr "KÖTÜ ŞİFRE: Şifre sözlük kontrolünü geçemedi." 
+diff --git a/src/lightdm-gtk-greeter.c b/src/lightdm-gtk-greeter.c
+index 6236922..88129ba 100644
+--- a/src/lightdm-gtk-greeter.c
++++ b/src/lightdm-gtk-greeter.c
+@@ -22,6 +22,7 @@
+ #include <stdlib.h>
+ #endif
+ 
++#include <syslog.h>
+ #include <stdio.h>
+ #include <string.h>
+ 
+@@ -1194,6 +1195,7 @@ static gchar *
+ message_text_compare(PAMConversationMessage *errortext)
+ {
+   gchar *error;
++  syslog (LOG_INFO, "Hata bu olsa %s gerek",errortext->text);
+   if (strstr(errortext->text,"Changing password for"))
+   {
+         error = ("Mevcut Şifrenizi Giriniz:");
